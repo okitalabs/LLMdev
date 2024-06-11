@@ -241,7 +241,7 @@ $ curl http://localhost:18080/v1/chat/completions \
 
 ### Embedding
 ```
-$ curl http://localhost:8080/v1/embeddings \
+$ curl http://localhost:18080/v1/embeddings \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer None" \
 -d '{
