@@ -243,7 +243,7 @@ python3 -m fastchat.serve.model_worker --model-names "gpt-3.5-turbo,text-davinci
 python3 -m fastchat.serve.openai_api_server --host 0.0.0.0  --port 8000 2>&1 &
 ```
 
-停止
+#### 停止
 ```
 ps -ef | grep fastchat | awk '{print $2}'|xargs kill -9
 ```
@@ -286,11 +286,11 @@ $ curl http://localhost:18080/v1/embeddings \
 [100.okitamark_hugface.ipynb](examples/100.okitamark_hugface.ipynb)  
 [110.okitamark_hugface_stream.ipynb](examples/110.okitamark_hugface_stream.ipynb) ... Stream出力版  
 
-## llama-cpp
+### llama-cpp
 [200.okitamark_llamacpp.ipynb](examples/200.okitamark_llamacpp.ipynb)  
 [210.okitamark_llamacpp-stream.ipynb](examples/210.okitamark_llamacpp-stream.ipynb) ... Stream出力版  
 
-## OpenAI API
+### OpenAI API
 [300.okitamark_openai.ipynb](examples/300.okitamark_openai.ipynb)  
 [310.okitamark_openai-stream.ipynb](examples/310.okitamark_openai-stream.ipynb) ... Stream出力版  
 
