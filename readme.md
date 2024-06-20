@@ -145,6 +145,8 @@ Docker内で作業する場合、以下でコンテナに入る。
 docker exec -it llmdev /bin/bash
 ```
 
+<hr>
+
 ## アプリ実行
 以下は、Docker内で実行する想定。
 
@@ -221,6 +223,33 @@ model_list:
 litellm --config litellm.yaml --detailed_debug --port 8000 --
 ```
 
+### FastChat
+#### インストール
+GitHubからダウンロードしてインストールする。
+```
+git clone https://github.com/lm-sys/FastChat.git
+cd FastChat
+pip3 install -e .
+```
+
+#### 実行  
+`elyza/ELYZA-japanese-Llama-2-7b`をダウンロードして実行する例。  
+`controller`, `model_worker`、`openai_api_server`の3つのプロセスを起動する。
+```
+python3 -m fastchat.serve.controller --host 0.0.0.0 2>&1 &
+
+python3 -m fastchat.serve.model_worker --model-names "gpt-3.5-turbo,text-davinci-003,text-embedding-ada-002" --model-path elyza/ELYZA-japanese-Llama-2-7b --num-gpus 3 --host 0.0.0.0 2>&1 &
+
+python3 -m fastchat.serve.openai_api_server --host 0.0.0.0  --port 8000 2>&1 &
+```
+
+停止
+```
+ps -ef | grep fastchat | awk '{print $2}'|xargs kill -9
+```
+
+<hr>
+
 ## 確認
 ### Chat Completion
 HostからLiteLLMにアクセスする場合。Docker内からアクセスする場合、Portは`8080`になる。
@@ -249,6 +278,21 @@ $ curl http://localhost:18080/v1/embeddings \
   "input": "query: 夕飯はお肉です。"
 }' 
 ```
+
+<hr>
+
+## Examples
+### AutoModelForCausalLM
+[100.okitamark_hugface.ipynb](examples/100.okitamark_hugface.ipynb)  
+[110.okitamark_hugface_stream.ipynb](examples/110.okitamark_hugface_stream.ipynb) ... Stream出力版  
+
+## llama-cpp
+[200.okitamark_llamacpp.ipynb](examples/200.okitamark_llamacpp.ipynb)  
+[210.okitamark_llamacpp-stream.ipynb](examples/210.okitamark_llamacpp-stream.ipynb) ... Stream出力版  
+
+## OpenAI API
+[300.okitamark_openai.ipynb](examples/300.okitamark_openai.ipynb)  
+[310.okitamark_openai-stream.ipynb](examples/310.okitamark_openai-stream.ipynb) ... Stream出力版  
 
 <hr>
 
